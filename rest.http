@@ -1,0 +1,86 @@
+### 
+POST http://127.0.0.1:85/api/v1/auth/register
+content-type: application/json
+
+{
+    "email": "test@mail.com",
+    "firstname": "John",
+    "lastname": "Doe",
+    "password": "12345678",
+    "role": "user",
+    "referredBy": "jamie",
+    "phone": "09000000000"
+  }
+
+### login URL
+POST http://127.0.0.1:85/api/v1/auth/login
+content-type: application/json
+
+{
+    "email": "test@mail.com",
+    "password": "12345678"
+}
+
+
+### Dashboard
+GET http://127.0.0.1:85/api/v1/auth/me
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYzNGYyYWM0LWRmMDMtNGI0NS1iNTdiLWMzYWMxNDI5ZTQzOCIsImlhdCI6MTczODcwNDc4NSwiZXhwIjoxNzQzODg4Nzg1fQ.4ZBBv-xNjVlD4x6IQAIOWm1okGYHhjW1oIvQMC0UU5M
+
+
+### create-elite-video
+POST http://127.0.0.1:85/api/v1/elite/create-elite-video
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYzNGYyYWM0LWRmMDMtNGI0NS1iNTdiLWMzYWMxNDI5ZTQzOCIsImlhdCI6MTczODcwNDc4NSwiZXhwIjoxNzQzODg4Nzg1fQ.4ZBBv-xNjVlD4x6IQAIOWm1okGYHhjW1oIvQMC0UU5M
+Content-Type: multipart/form-data; boundary=----WebKitFormBoundary7MA4YWxkTrZu0gW
+
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="dataFields"
+
+{"title": "Maverick Top Gun","description": "American Sci-Fi movie",
+"category": "Movie","directors": ["John", "Doe"],
+"starring": ["John", "Doe"],"genres": "Action",
+"audioLanguage": "English","producers": ["Tom Cruise", "Fox Studios"],
+"studio": "Fox Studio","approvalStatus": false}
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="files"; filename="phone1.jpg"
+Content-Type: image/jpeg
+
+< ./phone1.jpg
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="files"; filename="SampleVideo.mp4"
+Content-Type: video/jpeg
+
+< ./SampleVideo.mp4
+------WebKitFormBoundary7MA4YWxkTrZu0gW
+Content-Disposition: form-data; name="files"; filename="sample.srt"
+Content-Type: text/plain
+
+< ./sample.srt
+------WebKitFormBoundary7MA4YWxkTrZu0gW--
+
+
+### get-elite-videos
+GET http://127.0.0.1:85/api/v1/elite/get-all-elite-videos/b66f23e0-ef66-4522-9faa-96db28990b32
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYzNGYyYWM0LWRmMDMtNGI0NS1iNTdiLWMzYWMxNDI5ZTQzOCIsImlhdCI6MTczODcwNDc4NSwiZXhwIjoxNzQzODg4Nzg1fQ.4ZBBv-xNjVlD4x6IQAIOWm1okGYHhjW1oIvQMC0UU5M
+
+### get-elite-video-analytics
+GET http://127.0.0.1:85/api/v1/elite/get-all-elite-videos-analytics/b66f23e0-ef66-4522-9faa-96db28990b32
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYzNGYyYWM0LWRmMDMtNGI0NS1iNTdiLWMzYWMxNDI5ZTQzOCIsImlhdCI6MTczODcwNDc4NSwiZXhwIjoxNzQzODg4Nzg1fQ.4ZBBv-xNjVlD4x6IQAIOWm1okGYHhjW1oIvQMC0UU5M
+
+### get-elite-video-views-count
+GET http://127.0.0.1:85/api/v1/elite/get-all-elite-video-views-count/b66f23e0-ef66-4522-9faa-96db28990b32
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYzNGYyYWM0LWRmMDMtNGI0NS1iNTdiLWMzYWMxNDI5ZTQzOCIsImlhdCI6MTczODcwNDc4NSwiZXhwIjoxNzQzODg4Nzg1fQ.4ZBBv-xNjVlD4x6IQAIOWm1okGYHhjW1oIvQMC0UU5M
+
+
+### webhook-video-played
+GET http://127.0.0.1:85/api/v1/elite/webhook/video-played/b66f23e0-ef66-4522-9faa-96db28990b32
+
+
+### webhook-video-ended
+POST http://127.0.0.1:85/api/v1/elite/webhook/video-ended
+content-type: application/json
+
+{
+  "videoId": "b66f23e0-ef66-4522-9faa-96db28990b32",
+  "minutesWatched": "1.3",
+  "finishedWatching": false
+}
