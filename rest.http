@@ -59,7 +59,7 @@ Content-Type: text/plain
 
 
 ### get-elite-videos
-GET http://127.0.0.1:85/api/v1/elite/get-all-elite-videos/b66f23e0-ef66-4522-9faa-96db28990b32
+GET http://127.0.0.1:85/api/v1/elite/get-all-elite-videos
 authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYzNGYyYWM0LWRmMDMtNGI0NS1iNTdiLWMzYWMxNDI5ZTQzOCIsImlhdCI6MTczODcwNDc4NSwiZXhwIjoxNzQzODg4Nzg1fQ.4ZBBv-xNjVlD4x6IQAIOWm1okGYHhjW1oIvQMC0UU5M
 
 ### get-elite-video-analytics

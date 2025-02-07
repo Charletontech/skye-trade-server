@@ -11,7 +11,7 @@ const {
   videoEndedWebhook,
 } = require("../controllers/elite");
 
-const { protect } = require("../middleware/auth");
+const { protect, verified } = require("../middleware/auth");
 const { multerFileUpload } = require("../middleware/elite");
 
 const {
@@ -23,20 +23,23 @@ const {
 router.post(
   "/create-elite-video",
   protect,
+  verified,
   multerFileUpload.array("files"),
   validateEliteVideoDetails,
   eliteVideo
 );
 
-router.get("/get-all-elite-videos/:videoId", protect, getAllEliteVideos);
+router.get("/get-all-elite-videos", protect, verified, getAllEliteVideos);
 router.get(
   "/get-all-elite-videos-analytics/:videoId",
   protect,
+  verified,
   getAllEliteVideosAnalytics
 );
 router.get(
   "/get-all-elite-video-views-count/:videoId",
   protect,
+  verified,
   getAllEliteVideosViewsCount
 );
 

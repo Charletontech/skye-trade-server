@@ -1,11 +1,11 @@
 const jwt = require("jsonwebtoken");
 const asyncHandler = require("./async");
 const ErrorResponse = require("../utils/errorResponse");
-const {User, Role, RolePermission} = require("../models");
+const { User, Role, RolePermission } = require("../models");
 const bcrypt = require("bcryptjs");
 const crypto = require("crypto");
-const {matchpassword, containsAny} = require("../utils/auth");
-const { Op } =  require('@sequelize/core');
+const { matchpassword, containsAny } = require("../utils/auth");
+const { Op } = require("@sequelize/core");
 
 // Protect routes
 exports.protect = asyncHandler(async (req, res, next) => {
@@ -61,7 +61,7 @@ exports.protect = asyncHandler(async (req, res, next) => {
     }
     const lastActive = Date.now();
     req.user.update({
-      lastActive: lastActive
+      lastActive: lastActive,
     });
 
     next();
@@ -100,7 +100,6 @@ exports.authorize = (...roles) => {
 };
 
 exports.verifyPassword = asyncHandler(async (req, res, next) => {
-
   const user = await User.findByPk(req?.user?.id);
 
   const password = req.body?.password;
@@ -116,7 +115,7 @@ exports.verifyPassword = asyncHandler(async (req, res, next) => {
 });
 
 exports.verifyPin = asyncHandler(async (req, res, next) => {
-  const user = await User.findByPk(req?.user?.id)
+  const user = await User.findByPk(req?.user?.id);
 
   if (user?.isPinLockedOut) {
     return next(
@@ -144,11 +143,10 @@ exports.verifyPin = asyncHandler(async (req, res, next) => {
   const is_correct_pin = await bcrypt.compare(pin, userPin);
 
   if (!is_correct_pin) {
-
     if (user?.pin_attempts >= 5) {
       // Lockout user
       await user.update({
-        isPinLockedOut: true
+        isPinLockedOut: true,
       });
 
       return next(
@@ -159,7 +157,7 @@ exports.verifyPin = asyncHandler(async (req, res, next) => {
       );
     }
     await user.update({
-      pin_attempts: user.pin_attempts+1
+      pin_attempts: user.pin_attempts + 1,
     });
     return next(
       new ErrorResponse(
@@ -175,7 +173,7 @@ exports.verifyPin = asyncHandler(async (req, res, next) => {
 
   if (user.pin_attempts > 0) {
     await user.update({
-      pin_attempts: 0
+      pin_attempts: 0,
     });
   }
   next();
@@ -190,15 +188,15 @@ exports.validateActionToken = asyncHandler(async (req, res, next) => {
 
   const user = await User.findOne({
     where: [
-      {appActionToken: actionToken},
-      {appActionTokenExpire: { [Op.gt]: Date.now() }},
-    ]
+      { appActionToken: actionToken },
+      { appActionTokenExpire: { [Op.gt]: Date.now() } },
+    ],
   });
 
   if (!user) return next(new ErrorResponse("Invalid token", 400));
 
   await user.update({
-    appActionToken: '',
+    appActionToken: "",
     appActionTokenExpire: null,
   });
 
@@ -215,17 +213,19 @@ exports.isUserPermitted = (...roles) => {
         )
       );
     }
-    let userRolesNew = []
-    const userDetails = await User.findByPk(req.user.id)
-    let userRoles = userDetails?.roles
+    let userRolesNew = [];
+    const userDetails = await User.findByPk(req.user.id);
+    let userRoles = userDetails?.roles;
     for (let iv6 = 0; iv6 < userRoles?.length; iv6++) {
       const roleId = userRoles[iv6];
-      const userRole = await Role.findByPk(roleId)
-      let userRolesPermissions = userRole?.permissions
+      const userRole = await Role.findByPk(roleId);
+      let userRolesPermissions = userRole?.permissions;
       for (let iv4 = 0; iv4 < userRolesPermissions?.length; iv4++) {
         let userRolesPermissionId = userRolesPermissions[iv4];
-        const userRolesPermission = await RolePermission.findByPk(userRolesPermissionId)
-        userRolesNew.push(userRolesPermission.name)
+        const userRolesPermission = await RolePermission.findByPk(
+          userRolesPermissionId
+        );
+        userRolesNew.push(userRolesPermission.name);
       }
     }
     // console.log(userRolesNew)
