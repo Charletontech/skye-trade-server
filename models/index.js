@@ -42,6 +42,28 @@ db.EliteVideoViewsCount = require("./elite/eliteVideoViewsCount.model.js")(
   sequelize,
   Sequelize
 );
+db.EliteMusic = require("./elite/eliteMusic.model.js")(sequelize, Sequelize);
+db.EliteMusicAnalytics = require("./elite/eliteMusicAnalytics.model.js")(
+  sequelize,
+  Sequelize
+);
+db.EliteMusicStreamCount = require("./elite/eliteMusicStreamCount.model.js")(
+  sequelize,
+  Sequelize
+);
+db.ElitePodcast = require("./elite/elitePodcast.model.js")(
+  sequelize,
+  Sequelize
+);
+db.ElitePodcastEpisode = require("./elite/elitePodcastEpisode.model.js")(
+  sequelize,
+  Sequelize
+);
+db.ElitePodcastAnalytics = require("./elite/elitePodcastAnalytics.model.js")(
+  sequelize,
+  Sequelize
+);
+db.EliteBook = require("./elite/eliteBook.model.js")(sequelize, Sequelize);
 // models for Bloomzon Elite service - stops
 
 db.User = require("./user.model.js")(sequelize, Sequelize);

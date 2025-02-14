@@ -1,5 +1,4 @@
-const { EliteVideoAnalytics } = require("../../models");
-const ErrorResponse = require("../../utils/errorResponse");
+const { EliteVideoAnalytics } = require("../../../models");
 
 const getAllEliteVideosAnalytics = async (req, next) => {
   try {
@@ -7,14 +6,18 @@ const getAllEliteVideosAnalytics = async (req, next) => {
     if (!videoId) {
       throw new Error("Video ID parameter was not included in request url");
     }
-    const allEliteVideosAnalytics = EliteVideoAnalytics.findOne({
+    const allEliteVideosAnalytics = await EliteVideoAnalytics.findOne({
       where: {
         video_id: videoId,
       },
     });
+    console.log(allEliteVideosAnalytics);
+    if (allEliteVideosAnalytics === null)
+      throw new Error("no analytics where found for this video");
+
     return allEliteVideosAnalytics;
   } catch (err) {
-    return next(new ErrorResponse(err.message.replace(/[\\"]/gi, ""), 500));
+    throw new Error(err);
   }
 };
 

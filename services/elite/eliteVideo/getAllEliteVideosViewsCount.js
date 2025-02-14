@@ -1,5 +1,4 @@
-const { EliteVideoViewsCount } = require("../../models");
-const ErrorResponse = require("../../utils/errorResponse");
+const { EliteVideoViewsCount } = require("../../../models");
 
 const getAllEliteVideosViewsCount = (req, next) => {
   try {
@@ -15,7 +14,7 @@ const getAllEliteVideosViewsCount = (req, next) => {
     });
     return allEliteViewsCount;
   } catch (err) {
-    return next(new ErrorResponse(err.message.replace(/[\\"]/gi, ""), 500));
+    new Error(err);
   }
 };
 module.exports = getAllEliteVideosViewsCount;

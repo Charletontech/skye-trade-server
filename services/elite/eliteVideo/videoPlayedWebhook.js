@@ -2,8 +2,8 @@ const {
   EliteVideoAnalytics,
   Sequelize,
   EliteVideoViewsCount,
-} = require("../../models");
-const ErrorResponse = require("../../utils/errorResponse");
+} = require("../../../models");
+const ErrorResponse = require("../../../utils/errorResponse");
 
 const videoPlayedWebhook = async (req, next) => {
   try {
@@ -25,7 +25,7 @@ const videoPlayedWebhook = async (req, next) => {
       throw new Error("An error occurred updating database");
     }
 
-    return "view analytic recorded successfully";
+    return "view count row recorded successfully";
   } catch (err) {
     return next(new ErrorResponse(err.message.replace(/[\\"]/gi, ""), 500));
   }

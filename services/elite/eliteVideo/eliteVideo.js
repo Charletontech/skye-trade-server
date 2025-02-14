@@ -1,7 +1,6 @@
-const { EliteVideo, EliteVideoAnalytics } = require("../../models");
-const deleteFile = require("../../utils/elite/deleteFile");
-const uploadToCloudinary = require("../../utils/elite/uploadToCloudinary");
-const ErrorResponse = require("../../utils/errorResponse");
+const { EliteVideo, EliteVideoAnalytics } = require("../../../models");
+const deleteFile = require("../../../utils/elite/deleteFile");
+const uploadToCloudinary = require("../../../utils/elite/uploadToCloudinary");
 
 const eliteVideo = async (req, next) => {
   const uploadedFiles = req.files;
@@ -94,6 +93,7 @@ const eliteVideo = async (req, next) => {
       approvalStatus,
     });
 
+    // create analytics row for video
     const newVideoAnalytics = await EliteVideoAnalytics.create({
       video_id: newVideo.dataValues.id,
     });
@@ -103,7 +103,7 @@ const eliteVideo = async (req, next) => {
     uploadedFiles.forEach((file) => {
       deleteFile(file.path);
     });
-    return next(new ErrorResponse(err.message.replace(/[\\"]/gi, ""), 500));
+    new Error(err);
   }
 };
 

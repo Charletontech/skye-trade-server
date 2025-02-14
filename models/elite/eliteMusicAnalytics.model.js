@@ -1,13 +1,13 @@
 module.exports = (sequelize, Sequelize) => {
-  const eliteVideoAnalytics = sequelize.define("eliteVideoAnalytics", {
-    video_id: {
+  const eliteMusicAnalytics = sequelize.define("eliteMusicAnalytics", {
+    musicId: {
       type: Sequelize.UUID,
     },
-    totalViews: {
+    totalStreams: {
       type: Sequelize.INTEGER,
       defaultValue: 0,
     },
-    totalTimeWatched: {
+    totalTimeListened: {
       type: Sequelize.INTEGER,
       defaultValue: 0,
     },
@@ -21,5 +21,5 @@ module.exports = (sequelize, Sequelize) => {
     },
   });
 
-  return eliteVideoAnalytics;
+  return eliteMusicAnalytics;
 };

@@ -1,5 +1,4 @@
-const { EliteVideoAnalytics, Sequelize } = require("../../models");
-const ErrorResponse = require("../../utils/errorResponse");
+const { EliteVideoAnalytics, Sequelize } = require("../../../models");
 
 const videoEndedWebhook = async (req, next) => {
   const { videoId, minutesWatched, finishedWatching } = req.body;
@@ -20,7 +19,7 @@ const videoEndedWebhook = async (req, next) => {
   try {
     await EliteVideoAnalytics.update(updates, { where: { video_id: videoId } });
   } catch (err) {
-    return next(new ErrorResponse(err.message.replace(/[\\"]/gi, ""), 500));
+    new Error(err);
   }
 
   return "Successfully updated database for view analytics";
