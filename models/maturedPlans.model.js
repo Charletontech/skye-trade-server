@@ -1,47 +1,45 @@
 const { sequelize, DataTypes } = require("./db.config");
 
-const User = sequelize.define(
-  "User",
+const maturedPlans = sequelize.define(
+  "maturedPlans",
   {
-    userId: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-    },
-    fullName: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    email: {
-      type: DataTypes.STRING,
-      unique: true,
-      allowNull: false,
-    },
-    balance: {
+    id: {
       type: DataTypes.INTEGER,
-      defaultValue: 0,
+      primaryKey: true,
+      autoIncrement: true,
     },
-    password: {
+    user: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    country: {
+    amount: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    roi: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    plan: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    wallet: {
+    duration: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+    },
+    matureDate: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    walletType: {
+    status: {
       type: DataTypes.STRING,
       allowNull: false,
     },
   },
   {
-    // tableName: 'users',  // Specify table name (optional)
-    timestamps: false,
+    timestamps: true,
   }
 );
 
-module.exports = User;
+module.exports = maturedPlans;

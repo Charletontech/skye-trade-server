@@ -1,72 +1,69 @@
+const allFundWalletRequests = require("../services/admin/allFundWalletRequests.service");
+const allPlans = require("../services/admin/allPlans.service");
+const allUsers = require("../services/admin/allUsers.service");
+const allWithdrawalRequests = require("../services/admin/allWithdrawalRequests.service");
+const editUserBalance = require("../services/admin/editUserBalance.service");
+const updateFundWalletStatus = require("../services/admin/updateFundWalletStatus.service");
+const updateWithdrawalStatus = require("../services/admin/updateWithdrawalStatus.service");
 
-const asyncHandler = require("../middleware/async");
-const jwt = require("jsonwebtoken");
+exports.allUsers = async (req, res, next) => {
+  const responseObj = await allUsers(req, next);
+  const prepare = {
+    success: true,
+    data: responseObj,
+  };
+  res.status(200).json(prepare);
+};
 
-const {
-    getUsers,
-    getGuests,
-    getSellers,
-    getAdmins,
-    getUser,
-    suspendUser,
-    banUser,
-    activateUser,
-    unBanUser,
-} = require("../services/admin");
+exports.allPlans = async (req, res, next) => {
+  const responseObj = await allPlans(req, next);
+  const prepare = {
+    success: true,
+    data: responseObj,
+  };
+  res.status(200).json(prepare);
+};
+exports.allWithdrawalRequests = async (req, res, next) => {
+  const responseObj = await allWithdrawalRequests(req, next);
+  const prepare = {
+    success: true,
+    data: responseObj,
+  };
+  res.status(200).json(prepare);
+};
 
-exports.getUsers = asyncHandler(async (req, res, next) => {
-    const responseObj = await getUsers(req);
-    res.status(201).json(responseObj);
-});
+exports.allFundWalletRequests = async (req, res, next) => {
+  const responseObj = await allFundWalletRequests(req, next);
+  const prepare = {
+    success: true,
+    data: responseObj,
+  };
+  res.status(200).json(prepare);
+};
 
-exports.getGuests = asyncHandler(async (req, res, next) => {
-    const responseObj = await getGuests(req);
-    res.status(201).json(responseObj);
-});
+exports.editUserBalance = async (req, res, next) => {
+  const responseObj = await editUserBalance(req, next);
+  const prepare = {
+    success: true,
+    data: responseObj,
+  };
+  res.status(200).json(prepare);
+};
 
-exports.getSellers = asyncHandler(async (req, res, next) => {
-    const responseObj = await getSellers(req);
-    res.status(201).json(responseObj);
-});
+exports.updateWithdrawalStatus = async (req, res, next) => {
+  const responseObj = await updateWithdrawalStatus(req, next);
+  const prepare = {
+    success: true,
+    data: responseObj,
+  };
+  res.status(200).json(prepare);
+};
 
-exports.getAdmins = asyncHandler(async (req, res, next) => {
-    const responseObj = await getAdmins(req);
-    res.status(201).json(responseObj);
-});
-
-exports.getUser = asyncHandler(async (req, res, next) => {
-    const responseObj = await getUser(req);
-    res.status(201).json(responseObj);
-});
-
-exports.suspendUser = asyncHandler(async (req, res, next) => {
-    await suspendUser(req);
-    res.status(200).json({
-      success: true,
-      message: "User suspended",
-    });
-});
-
-exports.banUser = asyncHandler(async (req, res, next) => {
-    await banUser(req);
-    res.status(200).json({
-      success: true,
-      message: "User banned",
-    });
-});
-
-exports.activateUser = asyncHandler(async (req, res, next) => {
-    await activateUser(req);
-    res.status(200).json({
-      success: true,
-      message: "User activated",
-    });
-});
-
-exports.unBanUser = asyncHandler(async (req, res, next) => {
-    await unBanUser(req);
-    res.status(200).json({
-      success: true,
-      message: "User unbanned",
-    });
-});
+exports.updateFundWalletStatus = async (req, res, next) => {
+  const responseObj = await updateFundWalletStatus(req, next);
+  const prepare = {
+    success: true,
+    data: responseObj,
+  };
+  res.status(200).json(prepare);
+};

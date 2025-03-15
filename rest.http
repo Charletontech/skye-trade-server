@@ -1,30 +1,31 @@
 ### 
-POST http://127.0.0.1:85/api/v1/auth/register
+POST http://127.0.0.1:5000/api/v1/auth/register
 content-type: application/json
 
 {
     "email": "test@mail.com",
-    "firstname": "John",
-    "lastname": "Doe",
+    "fullName": "John",
+    "balance": 400,
     "password": "12345678",
-    "role": "user",
+    "country": "user",
     "referredBy": "jamie",
     "phone": "09000000000"
   }
 
 ### login URL
-POST http://127.0.0.1:85/api/v1/auth/login
+POST http://127.0.0.1:5000/api/v1/auth/login
 content-type: application/json
 
 {
-    "email": "test@mail.com",
-    "password": "12345678"
+    "email": "admin@mail.com",
+    "password": "admin-neche"
 }
 
 
 ### Dashboard
-GET http://127.0.0.1:85/api/v1/auth/me
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYzNGYyYWM0LWRmMDMtNGI0NS1iNTdiLWMzYWMxNDI5ZTQzOCIsImlhdCI6MTczODcwNDc4NSwiZXhwIjoxNzQzODg4Nzg1fQ.4ZBBv-xNjVlD4x6IQAIOWm1okGYHhjW1oIvQMC0UU5M
+GET http://localhost:5000/api/v1/admin/all-users
+credentials: "include"
+# authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYzNGYyYWM0LWRmMDMtNGI0NS1iNTdiLWMzYWMxNDI5ZTQzOCIsImlhdCI6MTczODcwNDc4NSwiZXhwIjoxNzQzODg4Nzg1fQ.4ZBBv-xNjVlD4x6IQAIOWm1okGYHhjW1oIvQMC0UU5M
 
 
 ### create-elite-video

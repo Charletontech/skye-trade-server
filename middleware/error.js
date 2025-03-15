@@ -9,7 +9,6 @@ const errorHandler = (err, req, res, next) => {
     // Log to console for dev
     console.log(err);
   }
-  
 
   // Mongoose bad ObjectId
   if (err.name === "CastError") {
@@ -38,8 +37,8 @@ const errorHandler = (err, req, res, next) => {
     error = new ErrorResponse(message, 400);
   }
 
-  if (err.message.indexOf('Write conflict') >= 0){
-    error = new ErrorResponse("Failed, Please try again", 400)
+  if (err.message.indexOf("Write conflict") >= 0) {
+    error = new ErrorResponse("Failed, Please try again", 400);
   }
 
   res.status(error.statusCode || 500).json({
@@ -47,6 +46,5 @@ const errorHandler = (err, req, res, next) => {
     error: error.message || "Server Error",
   });
 };
-
 
 module.exports = errorHandler;
