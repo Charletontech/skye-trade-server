@@ -7,6 +7,7 @@ const getUser = async ({ password, phone }) => {
     var sql = ORM.select("*", "hourglass_users", "phone", phone);
     connectDB.query(sql, async (err, result) => {
       if (err) {
+        console.log(err);
         reject(err);
       }
       if (!result || result.length === 0) {
@@ -25,7 +26,5 @@ const getUser = async ({ password, phone }) => {
     }
     return true;
   }
-
-  console.log(password);
 };
 module.exports = getUser;
