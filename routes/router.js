@@ -12,6 +12,8 @@ const {
   ninValidation,
   suspendedNin,
   dataModification,
+  getRequestHistory,
+  editRequestStatus,
 } = require("../controllers/controller");
 
 // public routes
@@ -24,6 +26,8 @@ router.get("/get-balance", getBalance);
 router.post("/nin-validation", ninValidation);
 router.post("/suspended-nin", suspendedNin);
 router.post("/data-modification", dataModification);
+router.get("/get-request-history", getRequestHistory);
+router.put("/edit-request-status/:id/:status", editRequestStatus);
 router.get("/refresh-server", refreshHandler);
 
 module.exports = router;

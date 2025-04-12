@@ -12,7 +12,8 @@ const verifyPaymentService = async ({ reference, fundAmount }) => {
       .then((response) => {
         // console.log("Transaction verified:", response.data);
         const { status, amount } = response.data.data;
-        if (status == "success" && amount === fundAmount) {
+        if (status == "success" && amount === fundAmount * 100) {
+          // Transaction was successful and amount matches
           resolve(true);
         } else {
           resolve(false);

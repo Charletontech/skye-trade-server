@@ -8,6 +8,8 @@ const getBalanceService = require("../services/getBalance.service");
 const ninValidationService = require("../services/ninValidation.service");
 const suspendedNinService = require("../services/suspendedNin.service");
 const dataModificationService = require("../services/dataModification.service");
+const getRequestHistoryService = require("../services/getRequestHistory.service");
+const editRequestStatusService = require("../services/editRequestStatus.service");
 
 const signUpHandler = async (req, res) => {
   try {
@@ -160,6 +162,36 @@ const dataModification = async (req, res) => {
   }
 };
 
+const getRequestHistory = async (req, res) => {
+  try {
+    var allRequests = await getRequestHistoryService(req.body);
+    if (allRequests) {
+      res.status(200).json({
+        message: allRequests,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: `Message: ${error}`,
+    });
+  }
+};
+
+const editRequestStatus = async (req, res) => {
+  try {
+    var updateSuccess = await editRequestStatusService(req.params);
+    if (updateSuccess) {
+      res.status(200).json({
+        message: `Successfully updated request status of ${req.params.id} to ${req.params.status}`,
+      });
+    }
+  } catch (error) {
+    res.status(500).json({
+      message: `Message: ${error}`,
+    });
+  }
+};
+
 const refreshHandler = (req, res) => {
   console.log("server has been refreshed!");
   res.json("server has been refreshed!");
@@ -176,4 +208,6 @@ module.exports = {
   ninValidation,
   suspendedNin,
   dataModification,
+  getRequestHistory,
+  editRequestStatus,
 };
