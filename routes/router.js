@@ -25,6 +25,5 @@ router.post("/nin-validation", ninValidation);
 router.post("/suspended-nin", suspendedNin);
 router.post("/data-modification", dataModification);
 router.get("/refresh-server", refreshHandler);
-router.post("/webhook", webhookHandler);
 
 module.exports = router;

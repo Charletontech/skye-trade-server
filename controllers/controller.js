@@ -168,7 +168,6 @@ const refreshHandler = (req, res) => {
 module.exports = {
   signUpHandler,
   refreshHandler,
-  webhookHandler,
   loginHandler,
   initiatePayment,
   verifyPayment,
