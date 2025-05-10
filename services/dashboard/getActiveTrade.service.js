@@ -6,7 +6,7 @@ const getActiveTrade = async (req, next) => {
     const { id } = req.user;
     // get user trade from DB
     let activeTradeData = await ActiveTrades.findOne({
-      where: { userId: id },
+      where: { userId: id, status: "open" },
       raw: true,
     });
 

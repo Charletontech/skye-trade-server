@@ -7,8 +7,16 @@ const {
   getActiveTrade,
   kyc,
   checkKycStatus,
+  verifyTaxCode,
+  withdrawalRequest,
+  editProfile,
+  changePassword,
 } = require("../controllers/dashboard");
-const { newTradeObj } = require("../validators/dashboard");
+const {
+  newTradeObj,
+  withdrawalRequestObj,
+  changePasswordObj,
+} = require("../validators/dashboard");
 
 const router = express.Router();
 
@@ -25,5 +33,20 @@ router.post(
   kyc
 );
 router.get("/check-kyc-status", authenticate, checkKycStatus);
+router.get("/verify-tax-code", authenticate, verifyTaxCode);
+router.post(
+  "/withdrawal-request",
+  authenticate,
+  withdrawalRequestObj,
+  withdrawalRequest
+);
+router.post("/edit-profile", authenticate, multerUpload.none(), editProfile);
+router.post(
+  "/change-password",
+  authenticate,
+  multerUpload.none(),
+  changePasswordObj,
+  changePassword
+);
 
 module.exports = router;

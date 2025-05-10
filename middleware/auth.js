@@ -64,11 +64,13 @@ exports.authenticate = async (req, res, next) => {
 };
 
 exports.authenticateAdmin = async (req, res, next) => {
-  const token = req.header.authorization;
-  console.log(token);
-  if (!token) {
+  const authHeader = req.headers.authorization;
+
+  if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return next(new ErrorResponse("No token, access denied", 401));
   }
+
+  const token = authHeader.split(" ")[1];
 
   // Verify the token
   jwt.verify(token, process.env.ADMIN_JWT_SECRET, (err, decoded) => {

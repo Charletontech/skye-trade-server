@@ -11,7 +11,6 @@ const sequelize = new Sequelize(
     port: process.env.DB_PORT || 3306,
   }
 );
-
 async function connectDB() {
   try {
     await sequelize.authenticate();

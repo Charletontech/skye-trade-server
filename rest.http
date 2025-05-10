@@ -31,7 +31,7 @@ authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcwYjFhOGI1L
 
 
 ### Dashboard
-GET http://localhost:5000/api/v1/admin/all-users
+PUT http://localhost:5000/api/v1/admin/all-users
 credentials: "include"
 # authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYzNGYyYWM0LWRmMDMtNGI0NS1iNTdiLWMzYWMxNDI5ZTQzOCIsImlhdCI6MTczODcwNDc4NSwiZXhwIjoxNzQzODg4Nzg1fQ.4ZBBv-xNjVlD4x6IQAIOWm1okGYHhjW1oIvQMC0UU5M
 
@@ -66,14 +66,68 @@ Content-Type: text/plain
 < ./sample.srt
 ------WebKitFormBoundary7MA4YWxkTrZu0gW--
 
+# SKYE TRADE ENDPOINTS
+### admin login
+POST http://127.0.0.1:5000/api/v1/auth/login
+content-type: application/json
 
-### get-elite-videos
-GET http://127.0.0.1:85/api/v1/elite/get-all-elite-videos
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYzNGYyYWM0LWRmMDMtNGI0NS1iNTdiLWMzYWMxNDI5ZTQzOCIsImlhdCI6MTczODcwNDc4NSwiZXhwIjoxNzQzODg4Nzg1fQ.4ZBBv-xNjVlD4x6IQAIOWm1okGYHhjW1oIvQMC0UU5M
+{
+  "identifier": "admin@mail.com",
+  "password": "admin-skye"
+}
 
-### get-elite-video-analytics
-GET http://127.0.0.1:85/api/v1/elite/get-elite-video-analytics/b66f23e0-ef66-4522-9faa-96db28990b32
-authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImYzNGYyYWM0LWRmMDMtNGI0NS1iNTdiLWMzYWMxNDI5ZTQzOCIsImlhdCI6MTczODcwNDc4NSwiZXhwIjoxNzQzODg4Nzg1fQ.4ZBBv-xNjVlD4x6IQAIOWm1okGYHhjW1oIvQMC0UU5M
+### edit-trade
+PUT http://127.0.0.1:5000/api/v1/admin/edit-trade/da250196-fa7a-4360-be08-2540a3d626ba
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluQG1haWwuY29tIiwiaWF0IjoxNzQ2ODQyOTkyLCJleHAiOjE3NDY4NTM3OTJ9.LTXxwt8go96auRA8kbS7rYDUzQejZP12J8JLPV8wrfI
+content-type: application/json
+
+{
+  "target": 20,
+  "profit": 10
+}
+
+
+### get-all-trades
+GET http://127.0.0.1:5000/api/v1/admin/all-trades
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluQG1haWwuY29tIiwiaWF0IjoxNzQ2ODQyOTkyLCJleHAiOjE3NDY4NTM3OTJ9.LTXxwt8go96auRA8kbS7rYDUzQejZP12J8JLPV8wrfI
+
+### get-all-kyc
+GET http://127.0.0.1:5000/api/v1/admin/all-kyc
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluQG1haWwuY29tIiwiaWF0IjoxNzQ2ODQyOTkyLCJleHAiOjE3NDY4NTM3OTJ9.LTXxwt8go96auRA8kbS7rYDUzQejZP12J8JLPV8wrfI
+
+### edit-kyc
+PUT http://127.0.0.1:5000/api/v1/admin/edit-kyc/0e62be63-e103-4ac0-bb9c-03e2be572128
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluQG1haWwuY29tIiwiaWF0IjoxNzQ2ODQyOTkyLCJleHAiOjE3NDY4NTM3OTJ9.LTXxwt8go96auRA8kbS7rYDUzQejZP12J8JLPV8wrfI
+content-type: application/json
+
+{
+  "status": "approved"
+}
+
+### get-all-users
+GET http://127.0.0.1:5000/api/v1/admin/all-users
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluQG1haWwuY29tIiwiaWF0IjoxNzQ2ODQyOTkyLCJleHAiOjE3NDY4NTM3OTJ9.LTXxwt8go96auRA8kbS7rYDUzQejZP12J8JLPV8wrfI
+
+### edit-user
+PUT http://127.0.0.1:5000/api/v1/admin/edit-user/70b1a8b5-6691-4f76-92d0-82b0c7c1edc6
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluQG1haWwuY29tIiwiaWF0IjoxNzQ2ODQyOTkyLCJleHAiOjE3NDY4NTM3OTJ9.LTXxwt8go96auRA8kbS7rYDUzQejZP12J8JLPV8wrfI
+content-type: application/json
+
+{
+  "action": "switchAccount",
+  "accountType": "Pro Account",
+  "amount": 150
+}
+
+### manage withdrawal request
+PUT http://127.0.0.1:5000/api/v1/admin/manage-withdrawal-request/c3b69392-a55f-462b-830d-c41f98bb1bba
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluQG1haWwuY29tIiwiaWF0IjoxNzQ2ODQyOTkyLCJleHAiOjE3NDY4NTM3OTJ9.LTXxwt8go96auRA8kbS7rYDUzQejZP12J8JLPV8wrfI
+content-type: application/json
+
+{"status": "approved"}
+
+
+
 
 ### get-elite-video-views-count
 GET http://127.0.0.1:85/api/v1/elite/get-all-elite-video-views-count/b66f23e0-ef66-4522-9faa-96db28990b32

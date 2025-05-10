@@ -15,7 +15,7 @@ const login = async (req, res, next) => {
         const token = jwt.sign(
           { id: process.env.ADMIN_MAIL },
           process.env.ADMIN_JWT_SECRET,
-          { expiresIn: "1h" }
+          { expiresIn: "3h" }
         );
 
         // res.cookie("adminToken", token, {
@@ -31,7 +31,7 @@ const login = async (req, res, next) => {
           token,
         };
       } else {
-        throw next(new ErrorResponse("Invalid credentials", 401));
+        throw next(new ErrorResponse("Invalid credentials", 400));
       }
     }
 
@@ -53,12 +53,12 @@ const login = async (req, res, next) => {
     });
 
     if (!userExists) {
-      throw next(new ErrorResponse("Invalid credentials", 401));
+      throw next(new ErrorResponse("Invalid credentials", 400));
     }
 
     const isMatch = await bcrypt.compare(password, userExists.password);
     if (!isMatch) {
-      throw next(new ErrorResponse("Invalid credentials", 401));
+      throw next(new ErrorResponse("Invalid credentials", 400));
     }
 
     const token = jwt.sign(

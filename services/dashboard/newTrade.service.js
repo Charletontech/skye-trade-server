@@ -2,6 +2,7 @@ const { not } = require("joi");
 const ActiveTrades = require("../../models/activeTrades.model");
 const User = require("../../models/user.model");
 const ErrorResponse = require("../../utils/errorResponse");
+const { Sequelize } = require("sequelize");
 
 const newTrade = async (req, next) => {
   try {
@@ -12,11 +13,28 @@ const newTrade = async (req, next) => {
       where: { userId: id },
     });
     // Check if user already has an active trade ongoing
+    const activeTrade = await ActiveTrades.findOne({
+      where: { userId: id, status: "open" },
+    });
+    if (activeTrade) {
+      throw next(
+        new ErrorResponse(
+          "You already have an active trade. Wait till the trade is closed.",
+          400
+        )
+      );
+    }
 
     // check if user has enough balance
     if (amount > balance) {
       throw next(new ErrorResponse("not enough funds", 402));
     }
+
+    // debit user balance
+    await User.update(
+      { balance: Sequelize.literal(`balance - ${amount}`) },
+      { where: { userId: id } }
+    );
 
     // save new trade to DB
     const pair = setPair(tradeType);

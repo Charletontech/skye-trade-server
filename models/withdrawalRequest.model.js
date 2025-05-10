@@ -1,38 +1,41 @@
 const { sequelize, DataTypes } = require("./db.config");
 
-const Kyc = sequelize.define(
-  "Kyc",
+const withdrawalRequests = sequelize.define(
+  "withdrawalRequests",
   {
-    kycId: {
+    withdrawalId: {
       type: DataTypes.UUID,
       defaultValue: DataTypes.UUIDV4,
       primaryKey: true,
+    },
+    username: {
+      type: DataTypes.STRING,
+      allowNull: false,
     },
     userId: {
       type: DataTypes.UUID,
       allowNull: false,
     },
-    idType: {
+    method: {
       type: DataTypes.STRING,
       allowNull: false,
     },
-    idFrontUrl: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-    idBackUrl: {
-      type: DataTypes.STRING,
+    amount: {
+      type: DataTypes.FLOAT,
       allowNull: false,
     },
     status: {
       type: DataTypes.ENUM("pending", "approved", "declined"),
       defaultValue: "pending",
     },
+    walletAddress: {
+      type: DataTypes.STRING,
+    },
   },
   {
-    tableName: "kyc",
-    timestamps: true,
+    // tableName: "",
+    timestamps: false,
   }
 );
 
-module.exports = Kyc;
+module.exports = withdrawalRequests;
