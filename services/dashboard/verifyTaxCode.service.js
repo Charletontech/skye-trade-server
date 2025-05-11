@@ -19,7 +19,7 @@ const verifyTaxCode = async (req, next) => {
     }
     // update taxCode status to used
     await TaxCodes.update({ status: "used" }, { where: { taxCode } });
-    return `TaxCode ${taxCode} has been successfully verified`;
+    return `TaxCode ${taxCode} has been successfully verified and used`;
   } catch (err) {
     throw next(new ErrorResponse(err?.message?.replace(/[\\"]/gi, ""), 500));
   }

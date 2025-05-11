@@ -23,7 +23,6 @@ const manageWithdrawalRequest = async (req, next) => {
       const userToDebit = await User.findByPk(request.userId);
       userToDebit.balance = Sequelize.literal(`balance - ${request.amount}`);
       userToDebit.save();
-      console.log(userToDebit);
       return `Withdrawal request status successfully changed to ${status}. User has been debited.`;
     }
 

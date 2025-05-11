@@ -1,6 +1,7 @@
 const Kyc = require("../../models/kyc.model");
 const ErrorResponse = require("../../utils/errorResponse");
 const uploadToCloudinary = require("../../utils/uploadToCloudinary");
+const { Op } = require("sequelize");
 
 const kyc = async (req, next) => {
   try {
@@ -10,7 +11,12 @@ const kyc = async (req, next) => {
     var kycInfo = {};
 
     // check if user already has a kyc record
-    const existingKycRecord = await Kyc.findOne({ where: { userId: id } });
+    const existingKycRecord = await Kyc.findOne({
+      where: {
+        userId: id,
+        [Op.or]: [{ status: "approved" }, { status: "pending" }],
+      },
+    });
     if (existingKycRecord) {
       return `You have already submitted your KYC. Please wait for admin verification.`;
     }
@@ -36,7 +42,6 @@ const kyc = async (req, next) => {
       idFrontUrl: kycInfo.idFrontUrl,
       idBackUrl: kycInfo.idBackUrl,
     });
-    console.log(newKycRecord);
     return `KYC data successfully submitted for Admin verification`;
   } catch (err) {
     throw next(new ErrorResponse(err?.message?.replace(/[\\"]/gi, ""), 500));
