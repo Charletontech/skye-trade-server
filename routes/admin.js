@@ -12,9 +12,11 @@ const {
   withdrawalRequests,
   taxCodes,
   generateTaxCode,
+  emailService,
 } = require("../controllers/admin");
 const editTradeObj = require("../validators/admin/editTradeObj");
 const editUserObj = require("../validators/admin/editUserObj");
+const emailObj = require("../validators/admin/emailObj");
 
 const router = express.Router();
 
@@ -32,5 +34,6 @@ router.put(
 );
 router.get("/generate-tax-code", authenticateAdmin, generateTaxCode);
 router.get("/tax-codes", authenticateAdmin, taxCodes);
+router.post("/email-service", authenticateAdmin, emailObj, emailService);
 
 module.exports = router;

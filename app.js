@@ -58,6 +58,7 @@ app.use(
 const authRoute = require("./routes/auth");
 const dashboardRoute = require("./routes/dashboard");
 const admin = require("./routes/admin");
+const { send } = require("process");
 
 // Mount routers
 app.use("/api/v1/auth", authRoute);

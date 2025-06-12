@@ -38,6 +38,7 @@
     "express-rate-limit": "latest",
     "express-session": "latest",
     "generate-password": "latest",
+    "handlebars": "^4.7.8",
     "helmet": "latest",
     "hpp": "latest",
     "ioredis": "latest",

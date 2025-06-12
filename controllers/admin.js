@@ -9,6 +9,7 @@ const {
   withdrawalRequests,
   taxCodes,
   generateTaxCode,
+  emailService,
 } = require("../services/admin");
 
 exports.allUsers = async (req, res, next) => {
@@ -94,6 +95,15 @@ exports.taxCodes = async (req, res, next) => {
 
 exports.generateTaxCode = async (req, res, next) => {
   const responseObj = await generateTaxCode(req, next);
+  const prepare = {
+    success: true,
+    data: responseObj,
+  };
+  res.status(200).json(prepare);
+};
+
+exports.emailService = async (req, res, next) => {
+  const responseObj = await emailService(req, next);
   const prepare = {
     success: true,
     data: responseObj,
