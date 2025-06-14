@@ -2,6 +2,7 @@ const bcrypt = require("bcryptjs");
 const User = require("../../models/user.model");
 const ErrorResponse = require("../../utils/errorResponse");
 const { Op } = require("sequelize");
+const { sendAutomatedMail } = require("../../utils/sendMail.util");
 
 const register = async (req, next) => {
   try {
@@ -52,6 +53,7 @@ const register = async (req, next) => {
     );
 
     if (newUser) {
+      sendAutomatedMail("signup", email);
       return `Registration for ${username} successful!`;
     }
 

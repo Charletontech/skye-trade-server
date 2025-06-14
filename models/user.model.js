@@ -54,10 +54,18 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    resetOtp: {
+      type: DataTypes.STRING,
+      allowNull: true,
+    },
+    resetOtpExpires: {
+      type: DataTypes.DATE,
+      allowNull: true,
+    },
   },
   {
     tableName: "skyetrade_users",
-    timestamps: true,
+    // timestamps: true,
   }
 );
 
