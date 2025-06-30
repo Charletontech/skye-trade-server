@@ -39,6 +39,7 @@
     "express-session": "latest",
     "generate-password": "latest",
     "handlebars": "^4.7.8",
+    "he": "^1.2.0",
     "helmet": "latest",
     "hpp": "latest",
     "ioredis": "latest",

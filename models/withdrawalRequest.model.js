@@ -31,6 +31,10 @@ const withdrawalRequests = sequelize.define(
     walletAddress: {
       type: DataTypes.STRING,
     },
+    fullDetails: {
+      type: DataTypes.STRING,
+      defaultValue: null,
+    },
   },
   {
     // tableName: "",

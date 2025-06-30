@@ -5,7 +5,8 @@ const schema = Joi.object({
   amount: Joi.number().required(),
   username: Joi.string().required(),
   method: Joi.string().required(),
-  walletAddress: Joi.string().required(),
+  walletAddress: Joi.string().optional(),
+  fullDetails: Joi.string().required(),
 });
 
 const withdrawalRequestObj = async (req, res, next) => {

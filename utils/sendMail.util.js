@@ -16,7 +16,7 @@ async function sendMailTemplate({ heading, greeting, message, recipient }) {
     const replacements = {
       heading,
       greeting,
-      message,
+      message: new handlebars.SafeString(message),
       year: new Date().getFullYear(),
     };
 

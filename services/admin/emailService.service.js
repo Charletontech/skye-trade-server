@@ -1,15 +1,15 @@
 const ErrorResponse = require("../../utils/errorResponse");
+const he = require("he");
 
 const emailService = async (req, next) => {
   try {
-    const x = {
-      heading: "Welcome to SkyeTrade Finance 👋",
-      greeting: "Hi there!",
-      message:
-        "Congratulations on your account creation with us. We're excited to have you on board. Explore your dashboard and start trading smartly with SkyeTrade today.",
-    };
     const { sendMailTemplate } = require("../../utils/sendMail.util");
+
+    // Decode HTML entities in the message using he
+    req.body.message = he.decode(req.body.message);
+
     const sentMail = await sendMailTemplate(req.body);
+
     if (!sentMail) {
       // throw next(new ErrorResponse("Request failed: Unable to deliver email", 500));
       throw new Error(
