@@ -11,6 +11,7 @@ const {
   withdrawalRequest,
   editProfile,
   changePassword,
+  withdrawalHistory,
 } = require("../controllers/dashboard");
 const {
   newTradeObj,
@@ -48,5 +49,6 @@ router.post(
   changePasswordObj,
   changePassword
 );
+router.get("/withdrawal-history", authenticate, withdrawalHistory);
 
 module.exports = router;

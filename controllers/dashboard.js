@@ -7,6 +7,7 @@ const {
   withdrawalRequest,
   editProfile,
   changePassword,
+  withdrawalHistory,
 } = require("../services/dashboard");
 const getActiveTrade = require("../services/dashboard/getActiveTrade.service");
 
@@ -84,6 +85,15 @@ exports.editProfile = async (req, res, next) => {
 
 exports.changePassword = async (req, res, next) => {
   const responseObj = await changePassword(req, next);
+  const prepare = {
+    success: true,
+    data: responseObj,
+  };
+  res.status(200).json(prepare);
+};
+
+exports.withdrawalHistory = async (req, res, next) => {
+  const responseObj = await withdrawalHistory(req, next);
   const prepare = {
     success: true,
     data: responseObj,

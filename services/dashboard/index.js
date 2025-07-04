@@ -5,6 +5,7 @@ const kyc = require("./kyc.service");
 const me = require("./me.service");
 const newTrade = require("./newTrade.service");
 const verifyTaxCode = require("./verifyTaxCode.service");
+const withdrawalHistory = require("./withdrawalHistory.service");
 const withdrawalRequest = require("./withdrawalRequest.service");
 
 module.exports = {
@@ -16,4 +17,5 @@ module.exports = {
   withdrawalRequest,
   editProfile,
   changePassword,
+  withdrawalHistory,
 };
