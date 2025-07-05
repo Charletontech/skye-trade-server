@@ -11,11 +11,7 @@ const TaxCodes = sequelize.define(
     status: {
       type: DataTypes.ENUM("used", "unused"),
       defaultValue: "unused",
-    },
-    codeType: {
-      type: DataTypes.ENUM("tax", "withdrawal"),
-      defaultValue: "tax",
-    },
+    }
   },
   {
     // tableName: "kyc",
