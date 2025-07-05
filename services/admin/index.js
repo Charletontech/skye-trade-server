@@ -8,6 +8,7 @@ const manageWithdrawalRequest = require("./manageWithdrawalRequest.service");
 const taxCodes = require("./taxCodes.service");
 const generateTaxCode = require("./generateTaxCode.service");
 const emailService = require("./emailService.service");
+const deleteAccount = require("./deleteAccount.service");
 
 module.exports = {
   editTrade,
@@ -20,4 +21,5 @@ module.exports = {
   generateTaxCode,
   taxCodes,
   emailService,
+  deleteAccount,
 };

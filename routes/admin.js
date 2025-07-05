@@ -13,6 +13,7 @@ const {
   taxCodes,
   generateTaxCode,
   emailService,
+  deleteAccount,
 } = require("../controllers/admin");
 const editTradeObj = require("../validators/admin/editTradeObj");
 const editUserObj = require("../validators/admin/editUserObj");
@@ -35,5 +36,6 @@ router.put(
 router.get("/generate-tax-code", authenticateAdmin, generateTaxCode);
 router.get("/tax-codes", authenticateAdmin, taxCodes);
 router.post("/email-service", authenticateAdmin, emailObj, emailService);
+router.delete("/delete-account/:userId", authenticateAdmin, deleteAccount);
 
 module.exports = router;
