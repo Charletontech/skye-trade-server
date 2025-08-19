@@ -7,9 +7,12 @@ const editUser = async (req, next) => {
     const action = req.body.action;
     const amount = req.body?.amount;
     const accountType = req.body?.accountType;
+    const status = req.body?.status;
     const userId = req.params.userId;
 
     const user = await User.findByPk(userId);
+
+    var message = `${action} action successfully executed!`;
 
     switch (action) {
       case "credit":
@@ -33,15 +36,22 @@ const editUser = async (req, next) => {
         user.accountType = accountType;
         user.save();
         break;
-
+      case "updateStatus":
+        await updateUserStatus();
+        break;
       default:
         throw next(new ErrorResponse("Invalid action selected", 400));
     }
 
-    return `${action} action successfully executed!`;
+    return message;
 
     function noAmountError() {
       throw next(new ErrorResponse("No amount was set", 400));
+    }
+
+    async function updateUserStatus() {
+      await user.update({ where: { userId }, status });
+      message = `User status updated to ${status}. User Id: ${userId}`;
     }
   } catch (err) {
     throw next(new ErrorResponse(err?.message?.replace(/[\\"]/gi, ""), 500));

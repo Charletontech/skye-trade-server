@@ -56,6 +56,15 @@ const login = async (req, res, next) => {
       throw next(new ErrorResponse("Invalid credentials", 400));
     }
 
+    // check user status
+    if (userExists.status !== "approved") {
+      message =
+        userExists.status === "pending"
+          ? "Your registration is yet to be approved"
+          : "Your account has been rejected";
+      throw next(new ErrorResponse(message, 403));
+    }
+
     const isMatch = await bcrypt.compare(password, userExists.password);
     if (!isMatch) {
       throw next(new ErrorResponse("Invalid credentials", 400));

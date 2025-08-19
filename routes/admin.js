@@ -14,10 +14,12 @@ const {
   generateTaxCode,
   emailService,
   deleteAccount,
+  updateUserStatus,
 } = require("../controllers/admin");
 const editTradeObj = require("../validators/admin/editTradeObj");
 const editUserObj = require("../validators/admin/editUserObj");
 const emailObj = require("../validators/admin/emailObj");
+const updateUserStatusObj = require("../validators/admin/updateUserStatusObj");
 
 const router = express.Router();
 
@@ -37,5 +39,13 @@ router.get("/generate-tax-code", authenticateAdmin, generateTaxCode);
 router.get("/tax-codes", authenticateAdmin, taxCodes);
 router.post("/email-service", authenticateAdmin, emailObj, emailService);
 router.delete("/delete-account/:userId", authenticateAdmin, deleteAccount);
+
+// This route ws not later used
+// router.put(
+//   "/update-user-status/:userId",
+//   authenticateAdmin,
+//   updateUserStatusObj,
+//   updateUserStatus
+// );
 
 module.exports = router;

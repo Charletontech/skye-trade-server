@@ -17,6 +17,11 @@ const User = sequelize.define(
       unique: true,
       allowNull: false,
     },
+    status: {
+      type: DataTypes.ENUM("approved", "pending", "rejected"),
+      defaultValue: "pending",
+      allowNull: false,
+    },
     email: {
       type: DataTypes.STRING,
       unique: true,

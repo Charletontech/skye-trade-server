@@ -9,6 +9,7 @@ const taxCodes = require("./taxCodes.service");
 const generateTaxCode = require("./generateTaxCode.service");
 const emailService = require("./emailService.service");
 const deleteAccount = require("./deleteAccount.service");
+const updateUserStatus = require("./updateUserStatus.service");
 
 module.exports = {
   editTrade,
@@ -22,4 +23,5 @@ module.exports = {
   taxCodes,
   emailService,
   deleteAccount,
+  updateUserStatus,
 };

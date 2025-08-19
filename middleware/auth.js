@@ -45,7 +45,6 @@ exports.admin = async (req, res, next) => {
 // AUTHENTICATION BY BEARER TOKEN
 exports.authenticate = async (req, res, next) => {
   const authHeader = req.headers.authorization;
-
   if (!authHeader || !authHeader.startsWith("Bearer ")) {
     return next(new ErrorResponse("No token, access denied", 401));
   }

@@ -2,13 +2,10 @@ const Joi = require("joi");
 const ErrorResponse = require("../../utils/errorResponse");
 
 const schema = Joi.object({
-  amount: Joi.number().optional(),
-  accountType: Joi.string().optional(),
-  status: Joi.string().valid("approved", "pending", "rejected"),
-  action: Joi.string().required(),
+  status: Joi.string().valid("approved", "rejected", "pending").required(),
 });
 
-const editUserObj = async (req, res, next) => {
+const updateUserStatusObj = async (req, res, next) => {
   try {
     const value = await schema.validateAsync(req.body);
     req.body = value;
@@ -18,4 +15,4 @@ const editUserObj = async (req, res, next) => {
   }
 };
 
-module.exports = editUserObj;
+module.exports = updateUserStatusObj;

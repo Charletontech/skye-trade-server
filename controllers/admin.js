@@ -11,6 +11,7 @@ const {
   generateTaxCode,
   emailService,
   deleteAccount,
+  updateUserStatus,
 } = require("../services/admin");
 
 exports.allUsers = async (req, res, next) => {
@@ -114,6 +115,15 @@ exports.emailService = async (req, res, next) => {
 
 exports.deleteAccount = async (req, res, next) => {
   const responseObj = await deleteAccount(req, next);
+  const prepare = {
+    success: true,
+    data: responseObj,
+  };
+  res.status(200).json(prepare);
+};
+
+exports.updateUserStatus = async (req, res, next) => {
+  const responseObj = await updateUserStatus(req, next);
   const prepare = {
     success: true,
     data: responseObj,

@@ -1,3 +1,11 @@
+PUT http://127.0.0.1:5000/api/v1/admin/update-user-status/70b1a8b5-6691-4f76-92d0-82b0c7c1edc6
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6ImFkbWluQG1haWwuY29tIiwiaWF0IjoxNzU1NjE0NjM1LCJleHAiOjE3NTU2MjU0MzV9.Kgd_BIVS9Gg17P_vq07Zax_wIgkoh96OvrQu-Z6DoIc
+content-type: application/json
+
+{
+  "status": "approved"
+}
+
 ### 
 POST http://127.0.0.1:5000/api/v1/auth/register
 content-type: application/json
@@ -17,13 +25,23 @@ POST http://127.0.0.1:5000/api/v1/auth/login
 content-type: application/json
 
 {
-    "identifier": "Charletontech",
-    "password": "123"
+    "identifier": "admin@mail.com",
+    "password": "admin-skye"
 }
+### {
+#     "identifier": "charletontech",
+#     "password": "123"
+# }
+# {
+#     "email": "admin@mail.com",
+#     "password": "admin-neche"
+# }
+
 ### {
 #     "email": "admin@mail.com",
 #     "password": "admin-neche"
 # }
+
 
 GET http://localhost:5000/api/v1/dashboard/me
 authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpZCI6IjcwYjFhOGI1LTY2OTEtNGY3Ni05MmQwLTgyYjBjN2MxZWRjNiIsImVtYWlsIjoidWthY2hhcmxpZUBnbWFpbC5jb20iLCJpYXQiOjE3NDU4ODA4OTAsImV4cCI6MTc0NTg4ODA5MH0.mycOPUae0JRFtfWuDstqh3uMNvkNE0qUieV_f_pDe50
