@@ -19,7 +19,6 @@ const uploadId = async (req, next) => {
     const userId = req.user.id;
     const docType = req.body.docType;
     const cloudinaryResponse = await uploadToCloudinary(file.path);
-    console.log(cloudinaryResponse.secure_url);
     const updatedUser = await User.update(
       {
         verificationDocument: cloudinaryResponse.secure_url,

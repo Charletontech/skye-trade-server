@@ -48,8 +48,9 @@ app.use(hpp());
 // Enable CORS
 app.use(
   cors({
+    // origin: true,
     // origin: "http://127.0.0.1:5500",
-    origin: true,
+    origin: "https://skye-trade.com",
     credentials: true,
   })
 );

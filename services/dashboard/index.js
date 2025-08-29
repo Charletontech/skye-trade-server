@@ -1,3 +1,4 @@
+const accountVerificationStatus = require("./accountVerificationStatus.service");
 const changePassword = require("./changePassword.service");
 const checkKycStatus = require("./checkKycStatus.service");
 const editProfile = require("./editProfile.service");
@@ -20,4 +21,5 @@ module.exports = {
   changePassword,
   withdrawalHistory,
   uploadId,
+  accountVerificationStatus,
 };

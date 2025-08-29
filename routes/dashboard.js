@@ -13,6 +13,7 @@ const {
   changePassword,
   withdrawalHistory,
   uploadId,
+  accountVerificationStatus,
 } = require("../controllers/dashboard");
 const {
   newTradeObj,
@@ -60,6 +61,12 @@ router.post(
   ]),
   uploadIdObj,
   uploadId
+);
+
+router.get(
+  "/account-verification-status",
+  authenticate,
+  accountVerificationStatus
 );
 
 module.exports = router;
