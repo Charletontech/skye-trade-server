@@ -83,7 +83,7 @@ const User = sequelize.define(
     },
   },
   {
-    // tableName: "skyetrade_users",
+    tableName: "skyetrade_users",
     timestamps: true,
   }
 );
