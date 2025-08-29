@@ -62,6 +62,11 @@ const register = async (req, next) => {
         { expiresIn: "2h" }
       );
 
+      // check user status and respond based on user status
+      if (userExists.status !== "approved") {
+        throw next(new ErrorResponse(JSON.stringify({ token }), 403));
+      }
+
       return {
         message: `Registration for ${username} successful!`,
         permission: "user",
