@@ -16,6 +16,9 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
+      unique: {
+        name: "unique_username",
+      },
     },
     status: {
       type: DataTypes.ENUM("approved", "pending", "rejected"),
@@ -26,6 +29,9 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       unique: true,
       allowNull: false,
+      unique: {
+        name: "unique_email",
+      },
     },
     phone: {
       type: DataTypes.STRING,
@@ -51,6 +57,14 @@ const User = sequelize.define(
       type: DataTypes.STRING,
       allowNull: false,
     },
+    verificationDocumentType: {
+      type: DataTypes.STRING,
+      defaultValue: "Not verified",
+    },
+    verificationDocument: {
+      type: DataTypes.STRING,
+      defaultValue: "No document provided",
+    },
     zipCode: {
       type: DataTypes.STRING,
       defaultValue: null,
@@ -69,7 +83,7 @@ const User = sequelize.define(
     },
   },
   {
-    tableName: "skyetrade_users",
+    // tableName: "skyetrade_users",
     timestamps: true,
   }
 );

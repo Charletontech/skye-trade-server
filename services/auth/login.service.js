@@ -57,24 +57,18 @@ const login = async (req, res, next) => {
     }
 
     // check user status
-    if (userExists.status !== "approved") {
-      message =
-        userExists.status === "pending"
-          ? "Your registration is yet to be approved"
-          : "Your account has been rejected";
-      throw next(new ErrorResponse(message, 403));
-    }
+    // if (userExists.status !== "approved") {
+    //   message =
+    //     userExists.status === "pending"
+    //       ? "Your registration is yet to be approved"
+    //       : "Your account has been rejected";
+    //   throw next(new ErrorResponse(message, 403));
+    // }
 
     const isMatch = await bcrypt.compare(password, userExists.password);
     if (!isMatch) {
       throw next(new ErrorResponse("Invalid credentials", 400));
     }
-
-    const token = jwt.sign(
-      { id: userExists.userId, email: userExists.email },
-      process.env.JWT_SECRET,
-      { expiresIn: "2h" }
-    );
 
     // res.cookie("authToken", token, {
     //   httpOnly: true,
@@ -82,6 +76,17 @@ const login = async (req, res, next) => {
     //   secure: process.env.NODE_ENV === "production",
     //   maxAge: 2 * 60 * 60 * 1000,
     // });
+
+    const token = jwt.sign(
+      { id: userExists.userId, email: userExists.email },
+      process.env.JWT_SECRET,
+      { expiresIn: "2h" }
+    );
+
+    // check user status and respond based on user status
+    if (userExists.status !== "approved") {
+      throw next(new ErrorResponse(JSON.stringify({ token }), 403));
+    }
 
     return {
       permission: "user",

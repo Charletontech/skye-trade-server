@@ -1,4 +1,5 @@
 const bcrypt = require("bcryptjs");
+const jwt = require("jsonwebtoken");
 const User = require("../../models/user.model");
 const ErrorResponse = require("../../utils/errorResponse");
 const { Op } = require("sequelize");
@@ -54,10 +55,19 @@ const register = async (req, next) => {
 
     if (newUser) {
       sendAutomatedMail("signup", email);
-      return `Registration for ${username} successful!`;
-    }
 
-    // return newUser;
+      const token = jwt.sign(
+        { id: newUser.userId, email: newUser.email },
+        process.env.JWT_SECRET,
+        { expiresIn: "2h" }
+      );
+
+      return {
+        message: `Registration for ${username} successful!`,
+        permission: "user",
+        token,
+      };
+    }
   } catch (err) {
     throw next(new ErrorResponse(err?.message?.replace(/[\\"]/gi, ""), 500));
   }

@@ -12,11 +12,13 @@ const {
   editProfile,
   changePassword,
   withdrawalHistory,
+  uploadId,
 } = require("../controllers/dashboard");
 const {
   newTradeObj,
   withdrawalRequestObj,
   changePasswordObj,
+  uploadIdObj,
 } = require("../validators/dashboard");
 
 const router = express.Router();
@@ -50,5 +52,14 @@ router.post(
   changePassword
 );
 router.get("/withdrawal-history", authenticate, withdrawalHistory);
+router.post(
+  "/upload-id",
+  authenticate,
+  multerUpload.fields([
+    { name: "idFile", maxCount: 1, limit: 30 * 1024 * 1024 },
+  ]),
+  uploadIdObj,
+  uploadId
+);
 
 module.exports = router;
