@@ -12,6 +12,7 @@ const {
   emailService,
   deleteAccount,
   updateUserStatus,
+  getDepositProofs,
 } = require("../services/admin");
 
 exports.allUsers = async (req, res, next) => {
@@ -124,6 +125,15 @@ exports.deleteAccount = async (req, res, next) => {
 
 exports.updateUserStatus = async (req, res, next) => {
   const responseObj = await updateUserStatus(req, next);
+  const prepare = {
+    success: true,
+    data: responseObj,
+  };
+  res.status(200).json(prepare);
+};
+
+exports.getDepositProofs = async (req, res, next) => {
+  const responseObj = await getDepositProofs(req, next);
   const prepare = {
     success: true,
     data: responseObj,

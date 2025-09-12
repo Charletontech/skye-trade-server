@@ -15,6 +15,7 @@ const {
   emailService,
   deleteAccount,
   updateUserStatus,
+  getDepositProofs,
 } = require("../controllers/admin");
 const editTradeObj = require("../validators/admin/editTradeObj");
 const editUserObj = require("../validators/admin/editUserObj");
@@ -39,6 +40,7 @@ router.get("/generate-tax-code", authenticateAdmin, generateTaxCode);
 router.get("/tax-codes", authenticateAdmin, taxCodes);
 router.post("/email-service", authenticateAdmin, emailObj, emailService);
 router.delete("/delete-account/:userId", authenticateAdmin, deleteAccount);
+router.get("/get-deposit-proofs", authenticateAdmin, getDepositProofs);
 
 // This route ws not later used
 // router.put(

@@ -10,6 +10,7 @@ const {
   withdrawalHistory,
   uploadId,
   accountVerificationStatus,
+  depositProof,
 } = require("../services/dashboard");
 const getActiveTrade = require("../services/dashboard/getActiveTrade.service");
 
@@ -114,6 +115,15 @@ exports.uploadId = async (req, res, next) => {
 
 exports.accountVerificationStatus = async (req, res, next) => {
   const responseObj = await accountVerificationStatus(req, next);
+  const prepare = {
+    success: true,
+    data: responseObj,
+  };
+  res.status(200).json(prepare);
+};
+
+exports.depositProof = async (req, res, next) => {
+  const responseObj = await depositProof(req, next);
   const prepare = {
     success: true,
     data: responseObj,

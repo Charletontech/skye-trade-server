@@ -14,6 +14,7 @@ const {
   withdrawalHistory,
   uploadId,
   accountVerificationStatus,
+  depositProof,
 } = require("../controllers/dashboard");
 const {
   newTradeObj,
@@ -67,6 +68,13 @@ router.get(
   "/account-verification-status",
   authenticate,
   accountVerificationStatus
+);
+
+router.post(
+  "/deposit-proof",
+  authenticate,
+  multerUpload.fields([{ name: "paymentProof", maxCount: 1 }]),
+  depositProof
 );
 
 module.exports = router;
